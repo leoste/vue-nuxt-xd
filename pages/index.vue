@@ -1,7 +1,7 @@
 <template>
   <div class="section">
     <tabs>
-      <tab title="Home">
+      <tab title="Home" :active="true">
         Cool home page
       </tab>
       <tab title="About">
@@ -9,6 +9,9 @@
       </tab>
       <tab title="Contact">
         Cool contact page
+      </tab>
+      <tab title="Works">
+        Cool works page
       </tab>
     </tabs>
   </div>
@@ -18,8 +21,9 @@
 
   import Card from "../components/card";
   import Tabs from "../components/tabs";
+  import Tab from "../components/tab";
   export default {
-    components: {Tabs, Card},
+    components: {Tab, Tabs, Card},
     data() {
       return {
         name: "",

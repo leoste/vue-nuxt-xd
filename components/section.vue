@@ -1,16 +1,29 @@
 <template>
   <div class="section">
-    <input type="text" v-model="name">
-    <input type="text" v-model="surname">
-    <p>{{ fullname }}</p>
+    <tabs>
+      <tab title="Home" :active="true">
+        Cool home page
+      </tab>
+      <tab title="About">
+        Cool about page
+      </tab>
+      <tab title="Contact">
+        Cool contact page
+      </tab>
+      <tab title="Works">
+        Cool works page
+      </tab>
+    </tabs>
   </div>
 </template>
 
 <script>
 
   import Card from "../components/card";
+  import Tabs from "../components/tabs";
+  import Tab from "../components/tab";
   export default {
-    components: {Card},
+    components: {Tab, Tabs, Card},
     data() {
       return {
         name: "",
