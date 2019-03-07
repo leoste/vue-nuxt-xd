@@ -21,7 +21,7 @@ module.exports = {
       {
         rel: 'stylesheet',
         href:
-          'https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons'
+          'https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.css'
       }
     ]
   },
