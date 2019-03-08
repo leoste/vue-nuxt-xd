@@ -1,10 +1,11 @@
 <template>
   <div class="garage" v-on:click="spawnCar(1)">
-    <car v-for="car in cars" :left="car.left" :top="car.top" :car="car.car"></car>
+    <car v-for="car in cars" :Left="car.left" :Top="car.top" :Car="car.car"></car>
   </div>
 </template>
 
 <script>
+
   import Game from "./game";
   import Car from "./Car";
   export default {
@@ -20,15 +21,15 @@
       spawnCar(carId)
       {
           this.cars.push({
-            left: 1,
-            top: 1,
+            left: 80,
+            top: 100,
             car: carId
           })
       }
     },
     mounted() {
       this.$el.style.left = this.left + "px";
-      this.$el.style.top = this.top + "px";
+      this.$el.style.top = this.top - 100 + "px";
     }
   }
 </script>

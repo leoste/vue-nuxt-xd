@@ -1,6 +1,6 @@
 <template>
   <div class="game">
-    <garage :left="0" :top="300">
+    <garage :left="0" :top="400">
 
     </garage>
   </div>
