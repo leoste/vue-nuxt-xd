@@ -1,5 +1,5 @@
 <template>
-    <div class="car" :style="'top:' + (top - 60) + 'px; left:' + left + 'px;'">
+    <div class="car" :style="'top:' + top + 'px; left:' + left + 'px;'">
 
     </div>
 </template>
@@ -9,24 +9,32 @@
   export default {
     components: {Game},
     name: "car",
-    props: ["Car", "Left", "Top" ],
+    props: ["Car", "Left", "Bottom" ],
     data() {
       return {
         left: 0,
-        top: 0
+        top: 0,
+        timerHandle: null
       }
     },
     mounted() {
       this.$el.style.backgroundImage = "url(/autoauto/car" + this.Car + ".png)";
       this.left = this.Left;
-      this.top = this.Top;
+      this.top = this.Bottom - 60;
 
-      setInterval(this.timerUpdate, 50);
+      this.timerHandle = setInterval(this.timerUpdate, 50);
     },
     methods: {
       timerUpdate()
       {
-        this.left += 5;
+        this.left += 15;
+
+        let wall = document.getElementsByClassName("wall")[0];
+
+        if (this.left + 120 >= wall.offsetLeft)
+        {
+          clearInterval(this.timerHandle);
+        }
       }
     }
   }

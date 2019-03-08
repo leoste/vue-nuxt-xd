@@ -1,6 +1,6 @@
 <template>
   <div class="garage" v-on:click="spawnCar(1)">
-    <car v-for="car in cars" :Left="car.left" :Top="car.top" :Car="car.car"></car>
+    <car v-for="car in cars" :Left="car.left" :Bottom="car.bottom" :Car="car.car"></car>
   </div>
 </template>
 
@@ -11,7 +11,7 @@
   export default {
     components: {Game, Car},
     name: "garage",
-    props: [ "left", "top" ],
+    props: [ "left", "bottom" ],
     data() {
       return {
         cars: []
@@ -22,21 +22,21 @@
       {
           this.cars.push({
             left: 80,
-            top: 100,
+            bottom: 100,
             car: carId
           })
       }
     },
     mounted() {
       this.$el.style.left = this.left + "px";
-      this.$el.style.top = this.top - 100 + "px";
+      this.$el.style.top = this.bottom - 100 + "px";
     }
   }
 </script>
 
 <style scoped>
   .garage {
-    position:relative;
+    position:absolute;
     width:80px;
     height:100px;
     background-image:url("../../static/autoauto/garage.png");
