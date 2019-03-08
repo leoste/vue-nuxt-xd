@@ -19,9 +19,9 @@
 
 <script>
 
-  import Card from "../components/card";
-  import Tabs from "../components/tabs";
-  import Tab from "../components/tab";
+  import Card from "./card";
+  import Tabs from "./tabs";
+  import Tab from "./tab";
   export default {
     components: {Tab, Tabs, Card},
     data() {
