@@ -41,7 +41,7 @@
       {
         clearInterval(this.timerHandle);
         this.overlay.style.backgroundImage = "url(/autoauto/fire.gif)";
-        this.timerHandle = setInterval(this.kill, 500);
+        this.timerHandle = setInterval(this.kill, 800);
       },
       kill()
       {
