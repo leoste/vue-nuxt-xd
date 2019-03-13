@@ -9,11 +9,12 @@
   export default {
     components: {Game},
     name: "car",
-    props: ["Car", "Left", "Bottom" ],
+    props: ["Car", "Left", "Bottom", "uid", "Speed"],
     data() {
       return {
         left: 0,
         top: 0,
+        speed: 0,
         timerHandle: null,
         wall: null,
         overlay: null
@@ -23,6 +24,7 @@
       this.$el.style.backgroundImage = "url(/autoauto/car" + this.Car + ".png)";
       this.left = this.Left;
       this.top = this.Bottom - 60;
+      this.speed = this.Speed;
 
       this.overlay = this.$el.getElementsByClassName("overlay")[0];
       this.wall = document.getElementsByClassName("wall")[0];
@@ -31,7 +33,7 @@
     methods: {
       timerUpdate()
       {
-        this.left += 15;
+        this.left += this.speed;
 
         if (this.left + 120 >= this.wall.offsetLeft) this.boom();
       },
@@ -39,6 +41,12 @@
       {
         clearInterval(this.timerHandle);
         this.overlay.style.backgroundImage = "url(/autoauto/fire.gif)";
+        this.timerHandle = setInterval(this.kill, 500);
+      },
+      kill()
+      {
+        clearInterval(this.timerHandle);
+        this.$emit("carDie", this.uid);
       }
     }
   }

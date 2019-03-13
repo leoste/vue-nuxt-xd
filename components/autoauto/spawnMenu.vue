@@ -1,7 +1,7 @@
 <template>
   <div class="spawnMenu">
     <spawnButton @updateScore="updateScore" :score="score"
-      :carId="1" :cost="30"
+      :carId="1" :cost="30" :speed="8"
       :left="left + 8" :top="0"
       :carSpawnLeft="carSpawnLeft - left"
       :carSpawnBottom="carSpawnBottom - top">
@@ -24,6 +24,9 @@
         btnCount: 1,
         prices: [
           30, 40, 90, 120
+        ],
+        speeds: [
+          8, 13, 17, 27
         ]
       }
     },
