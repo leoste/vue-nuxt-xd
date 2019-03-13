@@ -1,6 +1,6 @@
 <template>
     <div class="car" :style="'top:' + top + 'px; left:' + left + 'px;'">
-
+      <div class="overlay"></div>
     </div>
 </template>
 
@@ -15,7 +15,8 @@
         left: 0,
         top: 0,
         timerHandle: null,
-        wall: null
+        wall: null,
+        overlay: null
       }
     },
     mounted() {
@@ -23,6 +24,7 @@
       this.left = this.Left;
       this.top = this.Bottom - 60;
 
+      this.overlay = this.$el.getElementsByClassName("overlay")[0];
       this.wall = document.getElementsByClassName("wall")[0];
       this.timerHandle = setInterval(this.timerUpdate, 50);
     },
@@ -31,10 +33,12 @@
       {
         this.left += 15;
 
-        if (this.left + 120 >= this.wall.offsetLeft)
-        {
-          clearInterval(this.timerHandle);
-        }
+        if (this.left + 120 >= this.wall.offsetLeft) this.boom();
+      },
+      boom()
+      {
+        clearInterval(this.timerHandle);
+        this.overlay.style.backgroundImage = "url(/autoauto/fire.gif)";
       }
     }
   }
@@ -45,5 +49,10 @@
     position:absolute;
     width:120px;
     height:60px;
+  }
+  .overlay {
+    position:relative;
+    width: 100%;
+    height: 100%;
   }
 </style>
