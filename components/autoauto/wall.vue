@@ -14,7 +14,7 @@
     props: [ "right", "bottom" ],
     mounted() {
       this.$el.style.left = this.right - 80 + "px";
-      this.$el.style.top = this.bottom - 400 + "px";
+      this.$el.style.top = this.bottom - 300 + "px";
     }
   }
 </script>
@@ -23,7 +23,7 @@
   .wall {
     position:absolute;
     width:80px;
-    height:400px;
+    height:300px;
     background-image:url("../../static/autoauto/wall.png");
   }
 </style>

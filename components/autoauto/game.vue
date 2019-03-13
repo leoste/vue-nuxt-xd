@@ -1,9 +1,14 @@
 <template>
   <div class="game">
-    <garage :left="0" :bottom="400">
+    <div class="counter">Money: {{score}}</div>
+    <garage :left="0" :bottom="300">
 
     </garage>
-    <wall :right="640" :bottom="400">
+    <spawnMenu
+      @updateScore="updateScore" :score="score"
+      :left="0" :bottom="400" :carSpawnLeft="100" :carSpawnBottom="300">
+    </spawnMenu>
+    <wall :right="640" :bottom="300">
 
     </wall>
   </div>
@@ -12,9 +17,20 @@
 <script>
   import Garage from "./Garage";
   import Wall from "./Wall";
+  import SpawnMenu from "./spawnMenu"
   export default {
-    components: {Garage, Wall},
-    name: "Game"
+    components: {Garage, Wall, SpawnMenu},
+    name: "Game",
+    data() {
+      return {
+        score: 70
+      }
+    },
+    methods: {
+      updateScore(e) {
+        this.score += e;
+      }
+    }
   }
 </script>
 
@@ -24,5 +40,10 @@
     width:640px;
     height:400px;
     border:1px solid red;
+  }
+  .counter {
+    position:absolute;
+    left: 0;
+    top: 0;
   }
 </style>

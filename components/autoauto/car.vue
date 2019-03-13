@@ -14,7 +14,8 @@
       return {
         left: 0,
         top: 0,
-        timerHandle: null
+        timerHandle: null,
+        wall: null
       }
     },
     mounted() {
@@ -22,6 +23,7 @@
       this.left = this.Left;
       this.top = this.Bottom - 60;
 
+      this.wall = document.getElementsByClassName("wall")[0];
       this.timerHandle = setInterval(this.timerUpdate, 50);
     },
     methods: {
@@ -29,9 +31,7 @@
       {
         this.left += 15;
 
-        let wall = document.getElementsByClassName("wall")[0];
-
-        if (this.left + 120 >= wall.offsetLeft)
+        if (this.left + 120 >= this.wall.offsetLeft)
         {
           clearInterval(this.timerHandle);
         }
