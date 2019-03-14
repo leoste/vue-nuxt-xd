@@ -23,7 +23,7 @@
     name: "Game",
     data() {
       return {
-        score: 90
+        score: 7
       }
     },
     methods: {
