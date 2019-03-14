@@ -1,10 +1,11 @@
 <template>
   <div class="spawnMenu">
-    <spawnButton @updateScore="updateScore" :score="score"
-      :carId="1" :cost="30" :speed="8"
-      :left="left + 8" :top="0"
-      :carSpawnLeft="carSpawnLeft - left"
-      :carSpawnBottom="carSpawnBottom - top">
+    <spawnButton v-for="n in btnCount"
+      @updateScore="updateScore" :score="score"
+      :carId="n" :cost="prices[n - 1]" :speed="speeds[n - 1]" :value="values[n - 1]"
+      :left="left + 8 + 80 * (n - 1)" :top="0"
+      :carSpawnLeft="carSpawnLeft"
+      :carSpawnBottom="carSpawnBottom - bottom">
     </spawnButton>
   </div>
 </template>
@@ -21,12 +22,15 @@
     data() {
       return {
         top: 0,
-        btnCount: 1,
+        btnCount: 4,
         prices: [
           30, 40, 90, 120
         ],
         speeds: [
-          8, 13, 17, 27
+          12, 7, 17, 5
+        ],
+        values: [
+          38, 60, 110, 160
         ]
       }
     },

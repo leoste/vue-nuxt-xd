@@ -9,7 +9,7 @@
   export default {
     components: {Game},
     name: "car",
-    props: ["Car", "Left", "Bottom", "uid", "Speed"],
+    props: ["Car", "Left", "Bottom", "uid", "Speed", "OffsetX"],
     data() {
       return {
         left: 0,
@@ -17,12 +17,14 @@
         speed: 0,
         timerHandle: null,
         wall: null,
-        overlay: null
+        overlay: null,
+        offsetX: 0
       }
     },
     mounted() {
       this.$el.style.backgroundImage = "url(/autoauto/car" + this.Car + ".png)";
-      this.left = this.Left;
+      this.left = this.Left - this.OffsetX;
+      this.offsetX = this.OffsetX;
       this.top = this.Bottom - 60;
       this.speed = this.Speed;
 
@@ -35,7 +37,7 @@
       {
         this.left += this.speed;
 
-        if (this.left + 120 >= this.wall.offsetLeft) this.boom();
+        if (this.left + 120 >= this.wall.offsetLeft - this.offsetX) this.boom();
       },
       boom()
       {
