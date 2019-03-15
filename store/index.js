@@ -79,3 +79,20 @@ export const mutations = {
     }
   }
 };
+
+export const actions = {
+  addScore(context, amount)
+  { context.commit("updateScore", amount); },
+  removeScore(context, amount)
+  { context.commit("removeScore", -amount); },
+  setCarSpawnPoint(context, point)
+  { context.commit("setCarSpawnPoint", point); },
+  spawnCar(context, carId)
+  { context.commit("spawnCar", carId); },
+  deleteCar(context, carUid)
+  { context.commit("deleteCar", carUid); },
+  spawnWall(context, rect)
+  { context.commit("spawnWall", rect); },
+  deleteWall(context, wallUid)
+  { context.commit("deleteWall", wallUid); }
+};

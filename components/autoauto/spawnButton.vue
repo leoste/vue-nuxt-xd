@@ -29,10 +29,6 @@
 
         this.$store.commit("updateScore", -this.$store.state.carData[this.carId].price);
       },
-      carDie() {
-        this.$store.commit("updateScore", this.$store.state.carData[this.carId].value);
-        this.cars.shift();
-      },
     },
     mounted() {
       this.$el.style.left = this.left + "px";
