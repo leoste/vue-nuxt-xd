@@ -11,6 +11,8 @@ A classroom project in school
 ``` bash
 # install dependencies
 $ npm install
+$ npm install nuxt
+$ npm install vuex
 
 # serve with hot reload at localhost:3000
 $ npm run dev
