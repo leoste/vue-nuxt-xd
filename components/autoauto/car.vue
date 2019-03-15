@@ -15,7 +15,6 @@
         left: 0,
         top: 0,
         timerHandle: null,
-        wall: null,
         overlay: null,
       }
     },
@@ -28,7 +27,6 @@
       this.top = this.$store.state.carSpawnPoint.bottom - 60;
 
       this.overlay = this.$el.getElementsByClassName("overlay")[0];
-      this.wall = document.getElementsByClassName("wall")[0];
       this.timerHandle = setInterval(this.timerUpdate, 50);
     },
     methods: {
@@ -36,7 +34,14 @@
       {
         this.left += this.$store.state.carData[this.id].speed;
 
-        if (this.left + 120 >= this.wall.offsetLeft) this.boom();
+        for (let i = 0; i < this.$store.state.walls.length; i += 1)
+        {
+          if (this.left + 120 >= this.$store.state.walls[i].left)
+          {
+            this.boom();
+            break;
+          }
+        }
       },
       boom()
       {

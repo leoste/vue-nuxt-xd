@@ -11,10 +11,18 @@
   export default {
     components: {Game, Car},
     name: "wall",
-    props: [ "right", "bottom" ],
+    props: [ "left", "top", "width", "height", "wallUid" ],
+    data() {
+      return {
+        uid: 0
+      }
+    },
     mounted() {
-      this.$el.style.left = this.right - 80 + "px";
-      this.$el.style.top = this.bottom - 300 + "px";
+      this.uid = this.wallUid;
+      this.$el.style.left = this.left + "px";
+      this.$el.style.top = this.top + "px";
+      this.$el.style.width = this.width + "px";
+      this.$el.style.height = this.height + "px";
     }
   }
 </script>

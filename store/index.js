@@ -27,7 +27,9 @@ export const state = () => ({
   carSpawnPoint: {
     left: 0,
     bottom: 0
-  }
+  },
+  walls: [],
+  wallUid: 0
 });
 
 export const mutations = {
@@ -38,7 +40,7 @@ export const mutations = {
     state.carSpawnPoint.left = point.left;
     state.carSpawnPoint.bottom = point.top;
   },
-  spawnCar (state, carId) {
+  spawnCar(state, carId) {
     state.cars.push({
       id: carId,
       uid: state.carUid
@@ -51,6 +53,27 @@ export const mutations = {
       if (state.cars[i].uid === carUid)
       {
         state.cars.splice(i, 1);
+        break;
+      }
+    }
+  },
+  spawnWall(state, rect) {
+    state.walls.push({
+      left: rect.x,
+      top: rect.y,
+      width: rect.width,
+      height: rect.height,
+      uid: state.wallUid
+    });
+    state.wallUid += 1;
+  },
+  deleteWall(state, wallUid)
+  {
+    for (let i = 0; i < state.walls.length; i += 1)
+    {
+      if (state.walls[i].uid === wallUid)
+      {
+        state.walls.splice(i, 1);
         break;
       }
     }

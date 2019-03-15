@@ -12,14 +12,17 @@
       :left="0" :bottom="400" :carSpawnLeft="100" :carSpawnBottom="300">
     </spawnMenu>
 
-    <wall
-      :right="640" :bottom="300">
-    </wall>
-
     <car
       v-for="car in $store.state.cars"
       :key="car.uid" :carUid="car.uid" :carId="car.id">
     </car>
+
+    <wall
+      v-for="wall in $store.state.walls"
+      :key="wall.uid" :wallUid="wall.uid"
+      :left="wall.left" :top="wall.top"
+      :width="wall.width" :height="wall.height">
+    </wall>
   </div>
 </template>
 
@@ -30,7 +33,12 @@
   import Car from "./Car";
   export default {
     components: {Garage, Wall, SpawnMenu, Car},
-    name: "Game"
+    name: "Game",
+    mounted() {
+      this.$store.commit("spawnWall", {
+        x: 540, y: 0, width: 100, height: 300
+      });
+    }
   }
 </script>
 
