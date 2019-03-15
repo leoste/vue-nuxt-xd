@@ -1,16 +1,25 @@
 <template>
   <div class="game">
-    <div class="counter">Money: {{score}}</div>
-    <garage :left="0" :bottom="300">
+    <div class="counter">
+      Money: {{this.$store.state.score}}
+    </div>
 
+    <garage
+      :left="0" :bottom="300">
     </garage>
+
     <spawnMenu
-      @updateScore="updateScore" :score="score"
       :left="0" :bottom="400" :carSpawnLeft="100" :carSpawnBottom="300">
     </spawnMenu>
-    <wall :right="640" :bottom="300">
 
+    <wall
+      :right="640" :bottom="300">
     </wall>
+
+    <car
+      v-for="car in $store.state.cars"
+      :key="car.uid" :carUid="car.uid" :carId="car.id">
+    </car>
   </div>
 </template>
 
@@ -18,19 +27,10 @@
   import Garage from "./Garage";
   import Wall from "./Wall";
   import SpawnMenu from "./spawnMenu"
+  import Car from "./Car";
   export default {
-    components: {Garage, Wall, SpawnMenu},
-    name: "Game",
-    data() {
-      return {
-        score: 7
-      }
-    },
-    methods: {
-      updateScore(e) {
-        this.score += e;
-      }
-    }
+    components: {Garage, Wall, SpawnMenu, Car},
+    name: "Game"
   }
 </script>
 

@@ -1,43 +1,26 @@
 <template>
   <div class="spawnMenu">
-    <spawnButton v-for="n in btnCount"
-      @updateScore="updateScore" :score="score"
-      :carId="n" :cost="prices[n - 1]" :speed="speeds[n - 1]" :value="values[n - 1]"
-      :left="left + 8 + 80 * (n - 1)" :top="0"
-      :carSpawnLeft="carSpawnLeft"
-      :carSpawnBottom="carSpawnBottom - bottom">
+    <spawnButton v-for="(car, i) in $store.state.carData"
+      :carId="i"
+      :left="left + 8 + 80 * (i - 1)"
+      :top="0">
     </spawnButton>
   </div>
 </template>
 
 <script>
-
-  import Game from "./game";
   import SpawnButton from "./spawnButton";
-  import Garage from "./Garage";
   export default {
-    components: {Game, SpawnButton, Garage},
+    components: {SpawnButton},
     name: "spawnMenu",
-    props: [ "score", "left", "bottom", "carSpawnLeft", "carSpawnBottom" ],
+    props: [ "left", "bottom", "carSpawnLeft", "carSpawnBottom" ],
     data() {
       return {
         top: 0,
-        btnCount: 4,
-        speeds: [
-          16, 7, 12, 5
-        ],
-        prices: [
-          3, 17, 90, 900
-        ],
-        values: [
-          4, 20, 110, 999
-        ]
       }
     },
     methods: {
-      updateScore(e) {
-        this.$emit("updateScore", e);
-      }
+
     },
     mounted() {
       this.$el.style.left = this.left + "px";

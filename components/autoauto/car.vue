@@ -5,28 +5,27 @@
 </template>
 
 <script>
-  import Game from "./game";
   export default {
-    components: {Game},
     name: "car",
-    props: ["Car", "Left", "Bottom", "uid", "Speed", "OffsetX"],
+    props: ["carId", "carUid"],
     data() {
       return {
+        id: 0,
+        uid: 0,
         left: 0,
         top: 0,
-        speed: 0,
         timerHandle: null,
         wall: null,
         overlay: null,
-        offsetX: 0
       }
     },
     mounted() {
-      this.$el.style.backgroundImage = "url(/autoauto/car" + this.Car + ".png)";
-      this.left = this.Left - this.OffsetX;
-      this.offsetX = this.OffsetX;
-      this.top = this.Bottom - 60;
-      this.speed = this.Speed;
+      this.id = this.carId;
+      this.uid = this.carUid;
+
+      this.$el.style.backgroundImage = "url(/autoauto/car" + this.id + ".png)";
+      this.left = this.$store.state.carSpawnPoint.left;
+      this.top = this.$store.state.carSpawnPoint.bottom - 60;
 
       this.overlay = this.$el.getElementsByClassName("overlay")[0];
       this.wall = document.getElementsByClassName("wall")[0];
@@ -35,9 +34,9 @@
     methods: {
       timerUpdate()
       {
-        this.left += this.speed;
+        this.left += this.$store.state.carData[this.id].speed;
 
-        if (this.left + 120 >= this.wall.offsetLeft - this.offsetX) this.boom();
+        if (this.left + 120 >= this.wall.offsetLeft) this.boom();
       },
       boom()
       {
@@ -48,7 +47,8 @@
       kill()
       {
         clearInterval(this.timerHandle);
-        this.$emit("carDie", this.uid);
+        this.$store.commit("updateScore", this.$store.state.carData[this.id].value);
+        this.$store.commit("deleteCar", this.uid);
       }
     }
   }

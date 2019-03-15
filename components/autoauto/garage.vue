@@ -15,6 +15,7 @@
     mounted() {
       this.$el.style.left = this.left + "px";
       this.$el.style.top = this.bottom - 100 + "px";
+      this.$store.commit("setCarSpawnPoint", {left: 80, top: this.bottom});
     }
   }
 </script>

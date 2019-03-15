@@ -3,12 +3,8 @@
     <button class="clicker" v-on:click="spawnCar()">
 
     </button>
-    <car @carDie="carDie" v-for="car in cars"
-      :key="car.uid" :uid="car.uid" :Speed="speed" :Car="carId"
-      :Left="car.left" :Bottom="car.bottom" :OffsetX="car.offsetX">
-    </car>
-    <div class="text price">{{cost}}</div>
-    <div class="text value">{{value}}</div>
+    <div class="text price">{{$store.state.carData[carId].price}}</div>
+    <div class="text value">{{$store.state.carData[carId].value}}</div>
   </div>
 </template>
 
@@ -18,7 +14,7 @@
   export default {
     components: {Car},
     name: "spawnButton",
-    props: ["score", "left", "top", "carId", "speed", "cost", "carSpawnLeft", "carSpawnBottom", "value"],
+    props: ["left", "top", "carId",],
     data() {
       return {
         cars: [],
@@ -27,28 +23,16 @@
     },
     methods: {
       spawnCar() {
-        if (this.score < this.cost) return;
+        if (this.$store.state.score < this.$store.state.carData[this.carId].price) return;
 
-        this.cars.push({
-          left: this.carSpawnLeft,
-          bottom: this.carSpawnBottom + 100,
-          offsetX: this.left + 8,
-          uid: this.uidCount++
-        });
+        this.$store.commit("spawnCar", this.carId);
 
-        this.$emit("updateScore", -this.cost);
+        this.$store.commit("updateScore", -this.$store.state.carData[this.carId].price);
       },
-      carDie(uid) {
-        console.log(this.cars.length + "; " + uid);
-
-        this.updateScore(this.value);
+      carDie() {
+        this.$store.commit("updateScore", this.$store.state.carData[this.carId].value);
         this.cars.shift();
-        //this.cars.splice(0, 1);
-        //this.cars.pop();
       },
-      updateScore(e) {
-        this.$emit("updateScore", e);
-      }
     },
     mounted() {
       this.$el.style.left = this.left + "px";
